@@ -24,7 +24,13 @@ mixin _$CurrenciesState<T> {
   CurrencyEntity? get toCurrency =>
       throw _privateConstructorUsedError; //bool to check if the button is enabled
   String? get code => throw _privateConstructorUsedError; //to code
-  String? get toCode => throw _privateConstructorUsedError;
+  String? get toCode => throw _privateConstructorUsedError; //getHistoryState
+  RequestState get getHistoryState =>
+      throw _privateConstructorUsedError; //history rate
+  RateEntity? get historyRate =>
+      throw _privateConstructorUsedError; //get rate state
+  RequestState get getRateState => throw _privateConstructorUsedError; //rate
+  RateEntity? get rate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CurrenciesStateCopyWith<T, CurrenciesState<T>> get copyWith =>
@@ -43,7 +49,11 @@ abstract class $CurrenciesStateCopyWith<T, $Res> {
       CurrencyEntity? fromCurrency,
       CurrencyEntity? toCurrency,
       String? code,
-      String? toCode});
+      String? toCode,
+      RequestState getHistoryState,
+      RateEntity? historyRate,
+      RequestState getRateState,
+      RateEntity? rate});
 }
 
 /// @nodoc
@@ -65,6 +75,10 @@ class _$CurrenciesStateCopyWithImpl<T, $Res, $Val extends CurrenciesState<T>>
     Object? toCurrency = freezed,
     Object? code = freezed,
     Object? toCode = freezed,
+    Object? getHistoryState = null,
+    Object? historyRate = freezed,
+    Object? getRateState = null,
+    Object? rate = freezed,
   }) {
     return _then(_value.copyWith(
       getAllCurrenciesState: null == getAllCurrenciesState
@@ -91,6 +105,22 @@ class _$CurrenciesStateCopyWithImpl<T, $Res, $Val extends CurrenciesState<T>>
           ? _value.toCode
           : toCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      getHistoryState: null == getHistoryState
+          ? _value.getHistoryState
+          : getHistoryState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      historyRate: freezed == historyRate
+          ? _value.historyRate
+          : historyRate // ignore: cast_nullable_to_non_nullable
+              as RateEntity?,
+      getRateState: null == getRateState
+          ? _value.getRateState
+          : getRateState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      rate: freezed == rate
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as RateEntity?,
     ) as $Val);
   }
 }
@@ -109,7 +139,11 @@ abstract class _$$InitialImplCopyWith<T, $Res>
       CurrencyEntity? fromCurrency,
       CurrencyEntity? toCurrency,
       String? code,
-      String? toCode});
+      String? toCode,
+      RequestState getHistoryState,
+      RateEntity? historyRate,
+      RequestState getRateState,
+      RateEntity? rate});
 }
 
 /// @nodoc
@@ -129,6 +163,10 @@ class __$$InitialImplCopyWithImpl<T, $Res>
     Object? toCurrency = freezed,
     Object? code = freezed,
     Object? toCode = freezed,
+    Object? getHistoryState = null,
+    Object? historyRate = freezed,
+    Object? getRateState = null,
+    Object? rate = freezed,
   }) {
     return _then(_$InitialImpl<T>(
       getAllCurrenciesState: null == getAllCurrenciesState
@@ -155,6 +193,22 @@ class __$$InitialImplCopyWithImpl<T, $Res>
           ? _value.toCode
           : toCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      getHistoryState: null == getHistoryState
+          ? _value.getHistoryState
+          : getHistoryState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      historyRate: freezed == historyRate
+          ? _value.historyRate
+          : historyRate // ignore: cast_nullable_to_non_nullable
+              as RateEntity?,
+      getRateState: null == getRateState
+          ? _value.getRateState
+          : getRateState // ignore: cast_nullable_to_non_nullable
+              as RequestState,
+      rate: freezed == rate
+          ? _value.rate
+          : rate // ignore: cast_nullable_to_non_nullable
+              as RateEntity?,
     ));
   }
 }
@@ -168,7 +222,11 @@ class _$InitialImpl<T> implements _Initial<T> {
       this.fromCurrency,
       this.toCurrency,
       this.code,
-      this.toCode})
+      this.toCode,
+      this.getHistoryState = RequestState.initial,
+      this.historyRate,
+      this.getRateState = RequestState.initial,
+      this.rate})
       : _currencies = currencies;
 
   @override
@@ -196,10 +254,24 @@ class _$InitialImpl<T> implements _Initial<T> {
 //to code
   @override
   final String? toCode;
+//getHistoryState
+  @override
+  @JsonKey()
+  final RequestState getHistoryState;
+//history rate
+  @override
+  final RateEntity? historyRate;
+//get rate state
+  @override
+  @JsonKey()
+  final RequestState getRateState;
+//rate
+  @override
+  final RateEntity? rate;
 
   @override
   String toString() {
-    return 'CurrenciesState<$T>(getAllCurrenciesState: $getAllCurrenciesState, currencies: $currencies, fromCurrency: $fromCurrency, toCurrency: $toCurrency, code: $code, toCode: $toCode)';
+    return 'CurrenciesState<$T>(getAllCurrenciesState: $getAllCurrenciesState, currencies: $currencies, fromCurrency: $fromCurrency, toCurrency: $toCurrency, code: $code, toCode: $toCode, getHistoryState: $getHistoryState, historyRate: $historyRate, getRateState: $getRateState, rate: $rate)';
   }
 
   @override
@@ -216,7 +288,14 @@ class _$InitialImpl<T> implements _Initial<T> {
             (identical(other.toCurrency, toCurrency) ||
                 other.toCurrency == toCurrency) &&
             (identical(other.code, code) || other.code == code) &&
-            (identical(other.toCode, toCode) || other.toCode == toCode));
+            (identical(other.toCode, toCode) || other.toCode == toCode) &&
+            (identical(other.getHistoryState, getHistoryState) ||
+                other.getHistoryState == getHistoryState) &&
+            (identical(other.historyRate, historyRate) ||
+                other.historyRate == historyRate) &&
+            (identical(other.getRateState, getRateState) ||
+                other.getRateState == getRateState) &&
+            (identical(other.rate, rate) || other.rate == rate));
   }
 
   @override
@@ -227,7 +306,11 @@ class _$InitialImpl<T> implements _Initial<T> {
       fromCurrency,
       toCurrency,
       code,
-      toCode);
+      toCode,
+      getHistoryState,
+      historyRate,
+      getRateState,
+      rate);
 
   @JsonKey(ignore: true)
   @override
@@ -243,7 +326,11 @@ abstract class _Initial<T> implements CurrenciesState<T> {
       final CurrencyEntity? fromCurrency,
       final CurrencyEntity? toCurrency,
       final String? code,
-      final String? toCode}) = _$InitialImpl<T>;
+      final String? toCode,
+      final RequestState getHistoryState,
+      final RateEntity? historyRate,
+      final RequestState getRateState,
+      final RateEntity? rate}) = _$InitialImpl<T>;
 
   @override
   RequestState get getAllCurrenciesState;
@@ -257,6 +344,14 @@ abstract class _Initial<T> implements CurrenciesState<T> {
   String? get code;
   @override //to code
   String? get toCode;
+  @override //getHistoryState
+  RequestState get getHistoryState;
+  @override //history rate
+  RateEntity? get historyRate;
+  @override //get rate state
+  RequestState get getRateState;
+  @override //rate
+  RateEntity? get rate;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<T, _$InitialImpl<T>> get copyWith =>

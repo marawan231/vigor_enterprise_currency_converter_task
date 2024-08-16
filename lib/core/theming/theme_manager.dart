@@ -4,7 +4,6 @@ import 'package:vigor_enterprise_currency_converter_task/core/resources/custom_t
 import 'package:vigor_enterprise_currency_converter_task/core/resources/font_manager.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/theming/colors.dart';
 
-
 ThemeData get appTheme => ThemeData(
       scaffoldBackgroundColor: ColorsManager.white,
       splashColor: ColorsManager.transparent,
@@ -68,7 +67,8 @@ ThemeData get appTheme => ThemeData(
                 const BorderSide(color: ColorsManager.greyTextColor, width: 1),
             borderRadius: BorderRadius.circular(8.r)),
         focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: ColorsManager.primary, width: 1),
+            borderSide:
+                const BorderSide(color: ColorsManager.primary, width: 1),
             borderRadius: BorderRadius.circular(8.r)),
         disabledBorder: OutlineInputBorder(
             borderSide:
@@ -99,6 +99,7 @@ ThemeData get appTheme => ThemeData(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(36)),
         elevation: 0,
       ),
+      // cardColor: ColorsManager.white,
 
       // elevatedButtonTheme: ElevatedButtonThemeData(
       //   style: ButtonStyle(

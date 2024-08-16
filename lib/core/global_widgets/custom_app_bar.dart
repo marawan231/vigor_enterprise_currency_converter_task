@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/global_widgets/history_bottom_sheet.dart';
@@ -26,6 +27,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           InkWell(
             onTap: () {
               HistoryBottomSheet.open();
+              // log('info icon tapped' +
+              //     getIt<CurrenciesCubit>().state.historyRate!.rate.toString());
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(

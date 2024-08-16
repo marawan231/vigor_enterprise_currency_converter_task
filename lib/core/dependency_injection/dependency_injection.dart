@@ -7,6 +7,8 @@ import 'package:vigor_enterprise_currency_converter_task/features/home/data/data
 import 'package:vigor_enterprise_currency_converter_task/features/home/data/repositories/currencies_repository_implementation.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/domain/repositories/currencies_repository.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/domain/usecases/get_all_currencies.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/domain/usecases/get_historic_data.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/domain/usecases/get_rate_use_case.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/logic/cubit/currencies_cubit.dart';
 
 final getIt = GetIt.instance;
@@ -34,9 +36,19 @@ Future<void> setupGetIt() async {
   //use case
   getIt.registerLazySingleton<GetAllCurrenciesUseCase>(
       () => GetAllCurrenciesUseCase(getIt<CurrenciesRepository>()));
-  // posts cubit
-  getIt.registerLazySingleton<CurrenciesCubit>(() => CurrenciesCubit(
-      getAllCurrenciesUseCase: getIt<GetAllCurrenciesUseCase>()));
+  getIt.registerLazySingleton<GetHistoricCurrenciesUseCase>(
+      () => GetHistoricCurrenciesUseCase(getIt<CurrenciesRepository>()));
+  // getRate use case
+  getIt.registerLazySingleton<GetRateCurrenciesUseCase>(
+      () => GetRateCurrenciesUseCase(getIt<CurrenciesRepository>()));
+
+  // getHistory
+  getIt.registerLazySingleton<CurrenciesCubit>(
+    () => CurrenciesCubit(
+        getAllCurrenciesUseCase: getIt<GetAllCurrenciesUseCase>(),
+        getHistoricCurrenciesUseCase: getIt<GetHistoricCurrenciesUseCase>(),
+        getRateCurrenciesUseCase: getIt<GetRateCurrenciesUseCase>()),
+  );
 
   // //network info
 }

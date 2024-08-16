@@ -6,17 +6,26 @@ import 'package:vigor_enterprise_currency_converter_task/core/helpers/local_data
 import 'package:vigor_enterprise_currency_converter_task/core/navigator/navigator.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/network_service/network_exceptions.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/utils/enums.dart';
+import 'package:vigor_enterprise_currency_converter_task/core/utils/utils.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/domain/entities/currency.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/domain/entities/rate.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/domain/usecases/get_all_currencies.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/domain/usecases/get_historic_data.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/domain/usecases/get_rate_use_case.dart';
 
 part 'currencies_state.dart';
 part 'currencies_cubit.freezed.dart';
 
 class CurrenciesCubit extends Cubit<CurrenciesState> {
-  CurrenciesCubit({required this.getAllCurrenciesUseCase})
+  CurrenciesCubit(
+      {required this.getAllCurrenciesUseCase,
+      required this.getHistoricCurrenciesUseCase,
+      required this.getRateCurrenciesUseCase})
       : super(const _Initial());
 
   final GetAllCurrenciesUseCase getAllCurrenciesUseCase;
+  final GetHistoricCurrenciesUseCase getHistoricCurrenciesUseCase;
+  final GetRateCurrenciesUseCase getRateCurrenciesUseCase;
 
   void loadCurrencies() async {
     emit(state.copyWith(getAllCurrenciesState: RequestState.loading));
@@ -34,11 +43,18 @@ class CurrenciesCubit extends Cubit<CurrenciesState> {
           List<CurrencyEntity> getCurrencies =
               await getIt<CurrenciesManager>().getCurrencies();
 
-          emit(state.copyWith(currencies: getCurrencies));
+          emit(state.copyWith(
+              currencies: getCurrencies,
+              getAllCurrenciesState: RequestState.success));
         } else {
+          Utils.showErrorSnackBar(
+              message: DioExceptionType.getErrorMessage(message));
+
           List<CurrencyEntity> getCurrencies =
               await getIt<CurrenciesManager>().getCurrencies();
-          emit(state.copyWith(currencies: getCurrencies));
+          emit(state.copyWith(
+              currencies: getCurrencies,
+              getAllCurrenciesState: RequestState.error));
         }
       },
     );
@@ -46,11 +62,6 @@ class CurrenciesCubit extends Cubit<CurrenciesState> {
 
   void changeFromCurrency(
       CurrencyEntity choiceModel, List<CurrencyEntity> currencies) {
-    // emit(state.copyWith(currencies: state.currencies));
-    // log('changeFromCurrency' +
-    //     choiceModel.code.toString() +
-    // currencies.toString());
-    // emit(state.copyWith());
     for (var element in currencies) {
       element.isSelected = false;
     }
@@ -88,5 +99,48 @@ class CurrenciesCubit extends Cubit<CurrenciesState> {
       element.isSelected = false;
     }
     emit(state.copyWith());
+  }
+
+  //get history
+  Future<void> getHistory({
+    required String date,
+  }) async {
+    emit(state.copyWith(getHistoryState: RequestState.loading));
+    final result = await getHistoricCurrenciesUseCase.execute(
+        apiKey: AppConstants.apiKey,
+        date: date,
+        currencies: 'EUR',
+        baseCurrency: 'USD');
+    result.when(
+      success: (historyRate) async {
+        emit(state.copyWith(
+            historyRate: historyRate, getHistoryState: RequestState.success));
+      },
+      failure: (message) async {
+        Utils.showErrorSnackBar(
+            message: DioExceptionType.getErrorMessage(message));
+        emit(state.copyWith(getHistoryState: RequestState.error));
+      },
+    );
+  }
+
+  //get rate
+  void getRate() async {
+    emit(state.copyWith(getRateState: RequestState.loading));
+    final result = await getRateCurrenciesUseCase.execute(
+        apiKey: AppConstants.apiKey,
+        currencies: state.toCurrency?.code ?? "EUR",
+        baseCurrency: state.fromCurrency?.code ?? "USD");
+    result.when(
+      success: (rate) async {
+        emit(state.copyWith(rate: rate, getRateState: RequestState.success));
+      },
+      failure: (message) async {
+        Utils.showErrorSnackBar(
+            message: DioExceptionType.getErrorMessage(message));
+
+        emit(state.copyWith(getRateState: RequestState.error));
+      },
+    );
   }
 }

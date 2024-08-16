@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:vigor_enterprise_currency_converter_task/core/navigator/navigator.dart';
 
-void showErrorSnackBar(
-    {required String message, required BuildContext context}) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(
-        message,
-        style: const TextStyle(color: Colors.white),
+class Utils {
+  static void showErrorSnackBar({required String message}) {
+    ScaffoldMessenger.of(Go.navigatorKey.currentContext!).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.redAccent,
       ),
-      backgroundColor: Colors.redAccent,
-    ),
-  );
+    );
+  }
 }

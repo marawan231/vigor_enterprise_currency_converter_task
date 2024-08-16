@@ -16,6 +16,14 @@ class CurrenciesState<T> with _$CurrenciesState<T> {
     String? code,
     //to code
     String? toCode,
+    //getHistoryState
+    @Default(RequestState.initial) RequestState getHistoryState,
+    //history rate
+    RateEntity? historyRate,
+    //get rate state
+    @Default(RequestState.initial) RequestState getRateState,
+    //rate
+    RateEntity? rate,
 
     //disable button
   }) = _Initial;
