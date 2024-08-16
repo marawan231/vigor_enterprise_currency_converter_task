@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vigor_enterprise_currency_converter_task/core/dependency_injection/dependency_injection.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/logic/cubit/currencies_cubit.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/screens/home_view.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/splash/presentation/ui/screens/splash_screen.dart';
 
@@ -10,6 +13,8 @@ import 'page_router/imports_page_router_builder.dart';
 /// It contains a static instance of `PostsCubit` which is initialized in the constructor using the `getIt` function.
 /// It also contains a static instance of `PageRouterBuilder` used for building routes.
 class RouterGenerator {
+  // final PostsCubit postsCubit;
+
   RouterGenerator() {
     // postsCubit = getIt<PostsCubit>();
   }
@@ -28,7 +33,10 @@ class RouterGenerator {
 
       case NamedRoutes.home:
         return _pageRouter.build(
-          const HomeView(),
+          BlocProvider.value(
+            value: getIt<CurrenciesCubit>(),
+            child: const HomeView(),
+          ),
           settings: settings,
         );
     }

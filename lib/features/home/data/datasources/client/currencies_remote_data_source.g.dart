@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'post_remote_data_source.dart';
+part of 'currencies_remote_data_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,11 +8,11 @@ part of 'post_remote_data_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
-class _PostsWebService implements PostsWebService {
-  _PostsWebService(
+class _CurrenciesWebService implements CurrenciesWebService {
+  _CurrenciesWebService(
     this._dio, {
     this.baseUrl,
-    // this.errorLogger,
+    this.errorLogger,
   }) {
     baseUrl ??= 'https://api.freecurrencyapi.com/v1/';
   }
@@ -21,7 +21,7 @@ class _PostsWebService implements PostsWebService {
 
   String? baseUrl;
 
-  // final ParseErrorLogger? errorLogger;
+  final ParseErrorLogger? errorLogger;
 
   @override
   Future<CurrencyData> getAllCurrencies(String apiKey) async {
@@ -50,7 +50,7 @@ class _PostsWebService implements PostsWebService {
     try {
       _value = CurrencyData.fromJson(_result.data!);
     } on Object catch (e, s) {
-      // errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
