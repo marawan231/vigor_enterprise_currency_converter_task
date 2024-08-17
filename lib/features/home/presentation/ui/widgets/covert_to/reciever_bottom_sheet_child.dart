@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/reciever/reciever_bottom_sheet_list.dart';
-import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/reciever/reciever_bottom_sheet_select_button.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/covert_to/reciever_bottom_sheet_list.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/covert_to/reciever_bottom_sheet_select_button.dart';
 
 class RecieverBottomSheetChild extends StatefulWidget {
   const RecieverBottomSheetChild({super.key});
@@ -29,8 +29,4 @@ class _RecieverBottomSheetChildState extends State<RecieverBottomSheetChild> {
       ),
     );
   }
-
-  // _checkIfRecieverWalletSelected() {
-  //   return ref.read(walletsStateProvider).selectedReceiverWallet == null;
-  // }
 }

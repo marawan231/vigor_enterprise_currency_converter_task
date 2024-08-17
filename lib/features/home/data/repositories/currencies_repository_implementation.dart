@@ -24,14 +24,12 @@ class CurrenciesRepositoryImplementation extends CurrenciesRepository {
 
       List<CurrencyEntity> currencies = [];
       for (var element in response.data.keys) {
-        // log(element);
         currencies.add(CurrencyEntity(
           name: response.data[element]!.name.toString(),
           symbol: response.data[element]!.symbol.toString(),
           code: response.data[element]!.code.toString(),
         ));
       }
-      // NetworkIn
       if ((savedResponse.isEmpty ||
           savedResponse == [] ||
           // ignore: unnecessary_null_comparison
@@ -63,8 +61,6 @@ class CurrenciesRepositoryImplementation extends CurrenciesRepository {
 
     num rate = 0;
 
-    //get rate from response
-
     result.data.forEach((key, value) {
       rate = value.entries.first.value;
     });
@@ -91,8 +87,6 @@ class CurrenciesRepositoryImplementation extends CurrenciesRepository {
         apiKey: apiKey, currencies: currencies, baseCurrency: baseCurrency);
 
     num rate = 0;
-
-    //get rate from response
 
     result.data.forEach((key, value) {
       rate = value;

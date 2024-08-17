@@ -18,16 +18,14 @@ abstract class CurrenciesWebService {
     @Query('apikey') String apiKey,
   );
 
-  // //get history
   @GET("historical")
   Future<HistoricalResponseModel> getHistory(
     @Query('apikey') String apiKey,
     @Query('date') String date,
     @Query('currencies') String currencies,
-    // /base_currency
     @Query('base_currency') String baseCurrency,
   );
-  //get rate
+
   @GET("latest")
   Future<CurrencyGetRateResponseModel> getRate(
     @Query('apikey') String apiKey,

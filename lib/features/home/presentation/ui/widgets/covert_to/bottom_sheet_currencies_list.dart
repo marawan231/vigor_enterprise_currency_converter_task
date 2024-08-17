@@ -6,17 +6,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/dependency_injection/dependency_injection.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/domain/entities/currency.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/logic/cubit/currencies_cubit.dart';
-import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/reciever/bottom_sheet_wallet_list_item.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/covert_to/bottom_sheet_wallet_currency_item.dart';
 
-class BottomSheetWalletsList extends StatefulWidget {
-  const BottomSheetWalletsList({super.key});
+class BottomSheetCurrenciesList extends StatefulWidget {
+  const BottomSheetCurrenciesList({super.key});
 
   @override
   State<StatefulWidget> createState() => _RecieverBottomSheetWalletsListState();
 }
 
 class _RecieverBottomSheetWalletsListState
-    extends State<BottomSheetWalletsList> {
+    extends State<BottomSheetCurrenciesList> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -30,7 +30,7 @@ class _RecieverBottomSheetWalletsListState
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return BottomSheetWalletListItem(
+              return BottomSheetCurrencyListItem(
                   currency: state.currencies?[index] ??
                       CurrencyEntity(
                           code: 'USD',

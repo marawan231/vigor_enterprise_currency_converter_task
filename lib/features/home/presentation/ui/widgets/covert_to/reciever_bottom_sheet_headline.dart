@@ -9,7 +9,7 @@ class RecieverBottomSheetHeadline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Select Reciever wallet',
+      'Select the currency you want to convert to',
       style: getBoldStyle(fontSize: 20.sp, color: ColorsManager.black),
     );
   }

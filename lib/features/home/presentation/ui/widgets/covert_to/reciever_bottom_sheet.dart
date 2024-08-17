@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/dependency_injection/dependency_injection.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/navigator/navigator.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/logic/cubit/currencies_cubit.dart';
-import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/reciever/reciever_bottom_sheet_child.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/covert_to/reciever_bottom_sheet_child.dart';
 
 class RecieverBottomSheet {
   static Future<void> open() async {

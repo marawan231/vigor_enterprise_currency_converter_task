@@ -51,10 +51,5 @@ class _RecieverBottomSheetSelectButtonState
         .currencies!
         .any((element) => element.isSelected ?? false);
   }
-  // _checkIfButtonEnabled() {
-  //   return ref
-  //       .watch(walletsStateProvider)
-  //       .walletsList!
-  //       .any((element) => element.isSelected!);
-  // }
+ 
 }

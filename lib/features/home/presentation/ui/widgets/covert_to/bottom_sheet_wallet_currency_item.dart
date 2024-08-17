@@ -10,8 +10,8 @@ import 'package:vigor_enterprise_currency_converter_task/core/theming/colors.dar
 import 'package:vigor_enterprise_currency_converter_task/features/home/domain/entities/currency.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/logic/cubit/currencies_cubit.dart';
 
-class BottomSheetWalletListItem extends StatefulWidget {
-  const BottomSheetWalletListItem({super.key, required this.currency});
+class BottomSheetCurrencyListItem extends StatefulWidget {
+  const BottomSheetCurrencyListItem({super.key, required this.currency});
 
   final CurrencyEntity currency;
 
@@ -21,7 +21,7 @@ class BottomSheetWalletListItem extends StatefulWidget {
 }
 
 class _RecieverBottomSheetWalletListItemState
-    extends State<BottomSheetWalletListItem> {
+    extends State<BottomSheetCurrencyListItem> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(

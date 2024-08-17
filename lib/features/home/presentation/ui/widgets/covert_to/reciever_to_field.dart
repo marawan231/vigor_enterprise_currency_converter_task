@@ -8,28 +8,28 @@ import 'package:vigor_enterprise_currency_converter_task/core/global_widgets/cus
 import 'package:vigor_enterprise_currency_converter_task/core/resources/custom_text_styles.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/theming/colors.dart';
 import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/logic/cubit/currencies_cubit.dart';
-import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/sender/sender_bottom_sheet.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/presentation/ui/widgets/covert_to/reciever_bottom_sheet.dart';
 
-class SenderField extends StatefulWidget {
-  const SenderField({super.key});
+class RecieverField extends StatefulWidget {
+  const RecieverField({super.key});
 
   @override
-  State<SenderField> createState() => _SenderFieldState();
+  State<RecieverField> createState() => _RecieverFieldState();
 }
 
-class _SenderFieldState extends State<SenderField> {
+class _RecieverFieldState extends State<RecieverField> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CurrenciesCubit, CurrenciesState>(
       builder: (context, state) {
         return CustomChoicesContainer(
-          isContentPadding: state.fromCurrency == null,
-          subtitle: state.fromCurrency == null
+          isContentPadding: state.toCurrency == null,
+          subtitle: state.toCurrency == null
               ? null
-              : Text('Symbol: ${state.fromCurrency?.symbol ?? ''} ',
+              : Text('Symbol: ${state.toCurrency?.symbol ?? ''} ',
                   style: getRegularStyle(
                       color: ColorsManager.darkGrey, fontSize: 13.sp)),
-          leading: state.fromCurrency == null
+          leading: state.toCurrency == null
               ? null
               : Container(
                   width: 32.sp,
@@ -46,24 +46,21 @@ class _SenderFieldState extends State<SenderField> {
                       borderRadius: BorderRadius.circular(16.r),
                       child: CustomCachedImage(
                           image: FlagsManager().flagPicker(
-                              getIt<CurrenciesCubit>()
-                                      .state
-                                      .fromCurrency
-                                      ?.code ??
+                              getIt<CurrenciesCubit>().state.toCurrency?.code ??
                                   ''),
                           fit: BoxFit.fill,
                           width: 20.sp,
                           height: 20.sp)),
                 ),
-          headlineText: 'From',
-          hintText: state.fromCurrency == null
-              ? 'Select Currency to Convert'
-              : getIt<CurrenciesCubit>().state.fromCurrency?.name ?? '',
-          hintStyle: state.fromCurrency == null
+          headlineText: 'To',
+          hintText: state.toCurrency == null
+              ? 'Select Currency to Convert into'
+              : getIt<CurrenciesCubit>().state.toCurrency?.name ?? '',
+          hintStyle: state.toCurrency == null
               ? null
               : getSemiBoldStyle(fontSize: 17.sp),
           onTap: () {
-            SenderBottomSheet.open().whenComplete(() {
+            RecieverBottomSheet.open().whenComplete(() {
               getIt<CurrenciesCubit>().deselectAllCurrencies();
             });
           },

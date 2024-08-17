@@ -61,11 +61,6 @@ class DioExceptionType with _$DioExceptionType {
 
         return const DioExceptionType.unauthorizedRequest();
       case 404:
-        log('404');
-        // log(response.toString());
-        // log(response?.data['message']);
-
-        // log("errorModel.errors?.first.message ${errorModel.errors?.first.message.toString()}");
         return const DioExceptionType.notFound();
 
       case 409:
