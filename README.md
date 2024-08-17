@@ -1,6 +1,35 @@
 # vigor_enterprise_currency_converter_task
 
 ## Getting Started
+
+Brief Description of Currency Converter App
+This is a Flutter application that functions as a currency converter with the following features:
+
+Functionality:
+
+Supported Currencies: Displays a list of supported currencies with their corresponding country flags. This data is initially fetched from an API and then stored locally in a database for offline access.
+Historical Data: Allows users to view historical exchange rates for two chosen currencies for any selected date 
+
+
+.
+Currency Conversion: Enables users to convert between two currencies by choosing and tap on convert . The conversion is performed using an API.
+
+
+
+Technology Stack:
+
+Development Language: Dart (Flutter)
+API: Free Currency Converter API ( https://freecurrencyapi.com/)
+Flag Icons: FlagCDN (https://flagcdn.com/)
+Database: (Shared Preferences)
+State Management: Bloc/Cubit  pattern (aligned with clean architecture)
+UI Framework: Google Material Design
+Dependency Injection: Chosen library ( GetIt)
+Testing: Unit tests for API integration and business logic (MOCkITO)
+
+
+
+
 ## DEMO
 ** Android Demo **
 
