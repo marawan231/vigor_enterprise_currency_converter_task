@@ -1,94 +1,77 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vigor_enterprise_currency_converter_task/core/navigator/navigator.dart';
-import 'package:vigor_enterprise_currency_converter_task/core/utils/utils.dart';
+import 'package:vigor_enterprise_currency_converter_task/features/home/domain/entities/currency.dart';
 
-class PostsManager {
-  static const _key = 'posts';
+class CurrenciesManager {
+  static const _key = 'currency';
 
-  Future<void> addPost( post) async {
+  // Future<void> addCurrency(currency) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   final List<String> currencies = prefs.getStringList(_key) ?? [];
+
+  //   currencies.add(json.encode(currency.toJson()));
+
+  //   await prefs.setStringList(_key, currencies);
+  // }
+
+  // Future<void> removePost(post) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   final List<String> posts = prefs.getStringList(_key) ?? [];
+
+  //   posts.removeWhere((postJson) {
+  //     final postData = json.decode(postJson);
+  //     return postData['title'] == post.title &&
+  //         postData['isCompleted'] == post.isFavourite;
+  //   });
+
+  //   await prefs.setStringList(_key, posts);
+  // }
+
+  Future<List<CurrencyEntity>> getCurrencies() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> posts = prefs.getStringList(_key) ?? [];
+    final List<String> currencies = prefs.getStringList(_key) ?? [];
 
-    posts.add(json.encode(post.toJson()));
-
-    await prefs.setStringList(_key, posts);
-  }
-
-  Future<void> removePost( post) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> posts = prefs.getStringList(_key) ?? [];
-
-    posts.removeWhere((postJson) {
-      final postData = json.decode(postJson);
-      return postData['title'] == post.title &&
-          postData['isCompleted'] == post.isFavourite;
-    });
-
-    await prefs.setStringList(_key, posts);
-  }
-
-  Future<List<dynamic>> getPosts() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> posts = prefs.getStringList(_key) ?? [];
-
-    return posts.map((postJson) {
-      final postData = json.decode(postJson);
-      return (
-          body: postData['body'],
-          title: postData['title'],
-          userId: postData['userId'],
-          id: postData['id'],
-          isFavourite: postData['isFavourite']);
+    return currencies.map((currencyJson) {
+      final currencyData = json.decode(currencyJson);
+      return CurrencyEntity(
+        name: currencyData['name'],
+        symbol: currencyData['symbol'],
+        code: currencyData['code'],
+      );
     }).toList();
     //
   }
 
   //save posts
-  Future<void> savePosts(List<dynamic> posts) async {
+  Future<void> saveCurrencies(List<dynamic> currencies) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> postsJson =
-        posts.map((post) => json.encode(post.toJson())).toList();
-    await prefs.setStringList(_key, postsJson);
+    final List<String> curreincesJson =
+        currencies.map((currency) => json.encode(currency.toJson())).toList();
+    await prefs.setStringList(_key, curreincesJson);
   }
 
-  setPostIsFavourite( post, bool isFavourite) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> posts = prefs.getStringList(_key) ?? [];
+  // //remove favourite post
+  // Future<void> removeFavouritePost(post) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   final List<String> posts = prefs.getStringList(_key) ?? [];
 
-    final updatedPosts = posts.map((postJson) {
-      final postData = json.decode(postJson);
-      if (postData['title'] == post.title) {
-        postData['isFavourite'] = isFavourite;
-      }
-      return json.encode(postData);
-    }).toList();
+  //   final updatedPosts = posts.map((postJson) {
+  //     final postData = json.decode(postJson);
+  //     if (postData['title'] == post.title) {
+  //       postData['isFavourite'] = false;
+  //     }
+  //     return json.encode(postData);
+  //   }).toList();
 
-    await prefs.setStringList(_key, updatedPosts);
-  }
-
-  //remove favourite post
-  Future<void> removeFavouritePost( post) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> posts = prefs.getStringList(_key) ?? [];
-
-    final updatedPosts = posts.map((postJson) {
-      final postData = json.decode(postJson);
-      if (postData['title'] == post.title) {
-        postData['isFavourite'] = false;
-      }
-      return json.encode(postData);
-    }).toList();
-
-    await prefs.setStringList(_key, updatedPosts);
-  }
+  //   await prefs.setStringList(_key, updatedPosts);
+  // }
 
   //remove all posts
-  Future<void> removeAllPosts() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_key);
-    showErrorSnackBar(
-        message: 'cache cleared', context: Go.navigatorKey.currentContext!);
-  }
+  // Future<void> removeAllPosts() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.remove(_key);
+  //   showErrorSnackBar(
+  //       message: 'cache cleared', context: Go.navigatorKey.currentContext!);
+  // }
 }

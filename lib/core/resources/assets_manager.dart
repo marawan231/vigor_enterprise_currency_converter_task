@@ -19,4 +19,6 @@ class AssetsManager {
 
   // Path to the application's logo image ('aamar_logo.png').
   static const String appLogo = "$imagePath/app_logo.png";
+  //check
+  static const String check = "$imagePath/check.png";
 }

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:vigor_enterprise_currency_converter_task/core/constants/values.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 final Dio dio = Dio();
 
@@ -26,6 +27,13 @@ Dio setupDio() {
     ),
   );
 
+  dio.interceptors.add(
+    PrettyDioLogger(
+      requestBody: true,
+      requestHeader: true,
+      responseBody: true,
+    ),
+  );
 
   return dio;
 }

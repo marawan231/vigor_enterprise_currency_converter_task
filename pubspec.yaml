@@ -28,10 +28,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  build_runner: 
+  analyzer: 
+  bloc: ^8.1.4
+  bloc_test: ^9.1.7
+  build_runner: ^2.4.9
+  cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.6
   dio: ^5.6.0
   dio_smart_retry: ^6.0.0
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
@@ -45,19 +50,22 @@ dependencies:
   json_annotation: ^4.9.0
   json_serializable: ^6.8.0
   lottie: ^3.1.2
-  retrofit: ^4.2.0
-  retrofit_generator: ^8.2.0
+  pretty_dio_logger: ^1.4.0
+  retrofit: ^4.1.0
+  retrofit_generator: ^8.0.1
   shared_preferences: ^2.3.1
 
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
+  mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true # Add this line
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -68,7 +76,6 @@ flutter:
     - assets/images/
     - assets/lotties/
     - assets/svgs/
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
